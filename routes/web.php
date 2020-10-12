@@ -18,5 +18,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('product/create', $url . '\productController@create');
+Route::post('product/simpan', $url . '\productController@simpan');
 Route::get('product/{product:product_slug}', $url. "\productController@showProduct");
 Route::resource('product', $url . '\ProductController');
+// Route::get('product/edit/{product:product_slug}', $url. '\productController@edit');
+
+

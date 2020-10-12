@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-      $product = Product::all();
+      $product = Product::paginate(5);
       return view('product', compact('product'));
     }
 
@@ -32,8 +32,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+      return view('layouts.createProduct');
     }
+
+    
 
     /**
      * Store a newly created resource in storage.
@@ -63,10 +65,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
-    {
-      return view('product.edit', compact('product'));
-    }
+   
 
     /**
      * Update the specified resource in storage.
@@ -99,4 +98,23 @@ class ProductController extends Controller
 
       return redirect('/product');
     }
+    public function simpan(Request $request)
+    {
+      $product = new Product;
+      $product->product_title = $request->product_title;
+      $product->product_price = $request->product_price;
+      $product->product_slug = \Str::slug($request->product_title);
+      $product->product_image = $request->product_image;
+      $product->save();
+    
+      return redirect('product');
+    }
+
+    public function edit(Product $product)
+    {
+      // $data = $product;
+      // return view('editproduct', compact('data'));
+    }
+
 }
+

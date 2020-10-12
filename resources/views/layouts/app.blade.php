@@ -29,6 +29,11 @@
   <link rel="stylesheet" href="{{ url('http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css') }}"> 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+<style>
+svg.w-5.h-5 {
+    width: 30px;
+}
+</style>
 <div class="wrapper">
 
   <!-- Navbar -->

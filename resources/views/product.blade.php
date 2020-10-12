@@ -6,12 +6,14 @@
         <p>{{ $message }}</p>
     </div>
     @endif
-
+    <a href="{{url('product/create')}}" class="btn btn-outline-dark float-md-right"><i class="fa fa-plus" aria-hidden="true"></i>
+ CREATE</a>
+    
     <table class="table table-hover table-bordered">
       <tr class="bg-light">
         <th class="text-md-center">NO</th>
         <th class="text-md-center">Product</th>
-        <th class="text-md-center">Slug</th>
+        <th class="text-md-center">Harga</th>
         <th class="text-md-center">Image Name</th>
         <th width="280px" class="text-md-center">Action</th>
       </tr>
@@ -19,17 +21,19 @@
       <tr>
           <td class="text-md-center">{{ $loop->iteration }}</td>
           <td class="text-md-center">{{ $pr->product_title }}</td>
-          <td class="text-md-center">{{ $pr->product_slug }}</td> 
+          <td class="text-md-center">{{ $pr->product_price }}</td> 
           <td class="text-md-center">{{ $pr->product_image }}</td>
           <td class="text-md-center">
             <form action="{{ route('product.destroy', $pr->id) }}" method="post">
               @csrf
               @method('DELETE')
               <a href="{{ route('product.show', $pr->id) }}" class="btn btn-dark">
-              DETAIL
+              
+              <i class="fa fa-info"></i>
               </a>
               <a href="{{ route('product.edit', $pr->id) }}" class="btn btn-warning">
-              EDIT
+              
+              Edit
               </a>
               <button type="submit" class="btn btn-danger">
               <i class="fas fa-trash"></i></button>
@@ -42,4 +46,7 @@
         </tr>
       @endforelse
     </table>
+
+{{ $product->links() }}
+
 @endsection
