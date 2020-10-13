@@ -74,18 +74,6 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
-    {
-      $request->validate([
-          'product_title' => 'required',
-          'product_slug'    => 'required',
-          'product_image' => 'required',
-      ]);
-      $product->update($request->all());
-
-      return redirect('/product');
-    }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -98,22 +86,36 @@ class ProductController extends Controller
 
       return redirect('/product');
     }
-    public function simpan(Request $request)
+    public function simpan(Request $request, Product $product)
     {
       $product = new Product;
       $product->product_title = $request->product_title;
       $product->product_price = $request->product_price;
       $product->product_slug = \Str::slug($request->product_title);
       $product->product_image = $request->product_image;
-      $product->save();
-    
-      return redirect('product');
+      if(Product::where('product_slug', $product->product_slug)->exists()){
+        return redirect('/product/create')->with('error', 'Product udah ada gan!');
+      } else {
+        $product->save();
+        return redirect('/product');
+      }
     }
 
     public function edit(Product $product)
     {
-      // $data = $product;
-      // return view('editproduct', compact('data'));
+      $data = $product;
+      return view('product.edit', compact('data'));
+
+    }
+
+    public function update(Request $request)
+    {
+      $product = $request->all();
+      unset($product['_token']);
+      unset($product['_method']);
+      Product::where('id', $request->id)->update($product);
+      // dd($request->all());
+      return redirect('/product');
     }
 
 }

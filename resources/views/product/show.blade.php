@@ -17,7 +17,7 @@
             <div class="card mt-md-3">
                 <div class="card-header">
                 <div class="row">
-                    <div class="col text-eft">Product</div>
+                    <div class="col text-eft">Detail Product</div>
                     <div class="col text-right">
                     <a href="/product" class="btn btn-xs btn-dark">
                         <i class="fa fa-backspace"></i> 

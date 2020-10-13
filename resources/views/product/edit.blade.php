@@ -16,7 +16,7 @@
             <div class="card mt-md-3">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col text-left">Update Product</div>
+                        <div class="col text-lg-left">Update Product</div>
                         <div class="col text-right">
                         <a href="/product" class="btn btn-xs btn-dark">
                             <i class="fa fa-backspace"></i>
@@ -25,23 +25,30 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('product.update', $product->id) }}" method="post">
+                <form action="{{ url('/product/update') }}" method="post">
                     @csrf
-                    @method('PUT')
+                    @method('PATCH')
+                    <input type="hidden" name="id" value="{{ $data->id }}">
                     <div class="form-group">
-                        <label for="#">Product</label>
+                        <label for="#">Update Product</label>
                         <input type="text" name="product_title" class="form-control"
-                            placeholder="Nama Product" value="{{ $product->product_title }}">
+                            placeholder="Nama Product" value="{{ $data->product_title }}">
                     </div>
+                   
                     <div class="form-group">
                         <label for="#">Slug</label>
                         <input type="text" name="product_slug" class="form-control"
-                            placeholder="Nama Merk" value="{{ $product->product_slug }}">
+                            placeholder="Nama Merk" value="{{ $data->product_slug }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="#">Price</label>
+                        <input type="text" name="product_price" class="form-control"
+                            placeholder="Nama Merk" value="{{ $data->product_price }}">
                     </div>
                     <div class="form-group">
                         <label for="#">Image</label>
                         <input type="text" name="product_image" class="form-control"
-                            placeholder="Harga Beli" value="{{ $product->product_image }}">
+                            placeholder="Harga Beli" value="{{ $data->product_image }}">
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>                    

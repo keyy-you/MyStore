@@ -9,10 +9,14 @@
     <div class="col-12 bg-white">
         <div class="card">
             <div class="card-header bg-primary">
-                <a href="{{ url('/product') }}">
-                    <button class="btn btn-success float-left mr-2">Back</button>
-                </a>
-                <h2>Tambah</h2>
+            <div class="row">
+                        <div class="col text-lg-left">Create Product</div>
+                        <div class="col text-right">
+                        <a href="/product" class="btn btn-xs btn-dark">
+                            <i class="fa fa-backspace"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
 
@@ -23,6 +27,11 @@
                         <label for="exampleInputEmail1">Product Title</label>
                         <input type="text" class="form-control" value="" name="product_title">
                       </div>
+                      @if ($message = Session::get('error'))
+                        <div class="alert alert-danger">
+                            {{ $message }}
+                        </div>
+                        @endif
                       <div class="form-group">
                           <label for="exampleInputPassword1">Product Price</label>
                           <input type="text" class="form-control" value="" name="product_price">
